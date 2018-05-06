@@ -16,23 +16,24 @@ var filesToCache = [
 ];
 
 self.addEventListener('install', function(e) {
-  e.waitUntil(
-    caches.open(cacheName).then(function(cache) {
-      return cache.addAll(filesToCache);
-    })
-  );
+	try {
+		e.waitUntil(caches.open(cacheName).then(function(cache) {
+		return cache.addAll(filesToCache);
+		}));
+	} catch {}
 });
 
 self.addEventListener('activate', function(e) {
-  e.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        if (key !== cacheName && key !== dataCacheName) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
- 
-  return self.clients.claim();
+	try {
+		e.waitUntil(
+			caches.keys().then(function(keyList) {
+				return Promise.all(keyList.map(function(key) {
+				if (key !== cacheName && key !== dataCacheName) {
+					return caches.delete(key);
+				}}));
+			})
+		);
+	}
+	catch {}  
+	return self.clients.claim();
 });
