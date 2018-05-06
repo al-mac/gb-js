@@ -1,18 +1,18 @@
 var dataCacheName = 'gameboy-v1';
 var cacheName = 'gameboyPWA-1';
 var filesToCache = [
-  './index.html',
-  './web/homescreen192.png',
-  './web/index.css',
-  './web/index.js',
-  './emulator/apu.js',
-  './emulator/cpu.js',
-  './emulator/dasm.js',
-  './emulator/gpu.js',
-  './emulator/mbc.js',
-  './emulator/mmu.js',
-  './emulator/system.js',
-  './emulator/timer.js'
+  '../index.html',
+  './homescreen192.png',
+  './index.css',
+  './index.js',
+  '../emulator/apu.js',
+  '../emulator/cpu.js',
+  '../emulator/dasm.js',
+  '../emulator/gpu.js',
+  '../emulator/mbc.js',
+  '../emulator/mmu.js',
+  '../emulator/system.js',
+  '../emulator/timer.js'
 ];
 
 self.addEventListener('install', function(e) {
