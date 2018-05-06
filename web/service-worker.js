@@ -1,7 +1,7 @@
 var dataCacheName = 'gameboy-v1';
 var cacheName = 'gameboyPWA-1';
 var filesToCache = [
-  'index.html',
+  './index.html',
   'web/homescreen192.png',
   'web/index.css',
   'web/index.js',
