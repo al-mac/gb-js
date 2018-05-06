@@ -1,13 +1,13 @@
 {
   "name": "AlMac :: GameBoy",
   "short_name": "GameBoy",
-  "start_url": "../index.html",
+  "start_url": "index.html",
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#FFF",
   "description": "GameBoy emulator written in JavaScript.",
   "icons": [{
-    "src": "./web/homescreen192.png",
+    "src": "web/homescreen192.png",
     "sizes": "192x192",
     "type": "image/png"
   }],
