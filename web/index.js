@@ -182,6 +182,6 @@ document.body.onload = function() {
 	};
 
 	if ('serviceWorker' in navigator)
-		navigator.serviceWorker.register('/web/service-worker.js');
+		navigator.serviceWorker.register('web/service-worker.js');
 };
 
