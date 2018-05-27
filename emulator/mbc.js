@@ -15,6 +15,10 @@ var mbc = (function(rom, sys) {
 	
 	var saveTrigger = false;
 	
+	me.getRom = function() {
+		return rom;
+	};
+	
 	// MBC FUNCTIONS
 	me.changeRomBank = function(bank) {
 		switch(state.type) {

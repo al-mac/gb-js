@@ -60,6 +60,11 @@ var ct = {
 		menu.close();
 	},
 	
+	reset: () => {
+		sys.reload();
+		menu.close();
+	},
+	
 	resize: () => {
 		var parent = document.getElementById("display").parentElement;
 		var pw = parent.offsetWidth;

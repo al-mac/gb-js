@@ -10,6 +10,7 @@ html, body {
 	height:100%;
 	overflow:hidden;
 	font-family:monospace, consolas;
+	background: #07253D
 }
 
 /* ====MENU==== */
@@ -18,7 +19,7 @@ html, body {
 	background:#07253D;
 	width:80%;
 	height:100%;
-	box-shadow:6px 6px 6px rgba(80,80,80,0.5);
+	box-shadow:3px 3px 3px rgba(255,255,255,0.1);
 	z-index:4;
 	opacity:0;
 }
@@ -174,6 +175,9 @@ html, body {
 	#gb-container { 
 		background:transparent; 
 		border:none;
+		margin-left: calc(250px + 10%);
 	}
+	
+	#menu .item { font-size: 0.9em; }
 	#display { border:1px solid #000; }
 }

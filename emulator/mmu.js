@@ -8,6 +8,10 @@ var mmu = (function(sys) {
 	me.triggers = { audio: 0, tac: 0, tile: 0 };
 	
 	// RAM FUNCTIONS
+	me.getRom = function() {
+		return cram.getRom();
+	};
+	
 	me.opcode = function(offset) {										// OPCODE + OFFSET
 		return me.getAddr(me.pc + offset);
 	};

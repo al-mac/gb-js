@@ -180,15 +180,21 @@ var system = (function(display, loader, debugWindow) {
 		var file = e.target.files[0];
 		var r = new FileReader();
 		r.onload = function() {
-			window.cancelAnimationFrame(requestId);
 			var rom = new Uint8Array(r.result);
-			me.m.loadRom(rom);
-			me.m.loadBattery(loadBattery());
-			me.c.reset(true);
-			
-			me.frame();
+			me.reload(rom);
 		};
 		r.readAsArrayBuffer(file);
+	};
+	
+	me.reload = function(rom) {
+		window.cancelAnimationFrame(requestId);
+		if(rom == null)
+			rom = me.m.getRom();
+		me.m.loadRom(rom);
+		me.m.loadBattery(loadBattery());
+		me.c.reset(true);
+		
+		me.frame();
 	};
 	
 	me.holdButton = function(index) {
