@@ -160,6 +160,13 @@ document.body.onload = function() {
 	ct.resize();
 	menu.close();
 	
+	if(!menu.desktop) {
+		var c = document.getElementById("display");
+		var ctx = c.getContext("2d");
+		ctx.font = "8px Monospace, Consolas";
+		ctx.fillText("Touch here to open menu.", 2, 10);
+	};
+	
 	document.onkeydown = function(e) {									// HANDLE KEYS
 		var index = sys.binds.indexOf(e.keyCode);
 		sys.holdButton(index);
