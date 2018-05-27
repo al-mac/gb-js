@@ -50,6 +50,8 @@ html, body {
 	font-size:1.2em;
 }
 
+#menu .item:active { color:#FFF; }
+
 .item:before {
   content: "";
   display: inline-block;
