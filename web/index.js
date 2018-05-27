@@ -1,5 +1,5 @@
 var sys = null;
-
+var _speed = 1;
 var menu = {
 	desktop: document.body.offsetWidth >= 600,
 	animation: null,
@@ -63,6 +63,69 @@ var ct = {
 	reset: () => {
 		sys.reload();
 		menu.close();
+	},
+	
+	speed: () => {
+		_speed = _speed === 1.5 ? 1 : 1.5;
+		sys.config({ speed: _speed });
+		menu.close();
+	},
+	
+	openWindow: (name) => {
+		var wns = document.getElementsByClassName("gb-window");
+		
+		for(var i = 0; i < wns.length; i++) {
+			if(wns[i].id == name)
+				wns[i].style.display = "block";
+			else
+				wns[i].style.display = "none";
+		};
+		
+		document.getElementById("gb-shadow").style.display = "block"
+	},
+	
+	closeWindow: (name) => {
+		document.getElementById("gb-shadow").style.display = "none";
+	},
+	
+	localStorageWindow: () => {
+		ct.openWindow("wn-localStorage");
+		var tb = document.querySelector("#localStorage-table table tbody");
+		tb.innerHTML = "";
+		var free = 10485760;
+		for (var i = 0, len = localStorage.length; i < len; ++i) {
+			var tr = document.createElement("tr");
+			
+			var k = document.createElement("td");
+			k.innerHTML = localStorage.key(i);
+			tr.appendChild(k);
+			
+			var t = document.createElement("td");
+			t.innerHTML = localStorage.key(i).indexOf("B_") === 0 
+				? "Battery" : "Save State";
+			tr.appendChild(t);
+			
+			var l = document.createElement("td");
+			var ll = localStorage.getItem(localStorage.key(i)).length;
+			free -= ll;
+			l.innerHTML = (ll / 1024).toFixed(2) + " kB";
+			tr.appendChild(l);
+			
+			var r = document.createElement("td");
+			r.innerHTML = "<a href='javascript:ct.removelocalStorage(\""
+				+ localStorage.key(i)
+				+ "\")'>Remove</a>";
+			tr.appendChild(r);
+			tb.appendChild(tr);
+		};
+		
+		document.getElementById("localStorage-free").innerHTML = 
+			"Free Space: " + (free / 1024).toFixed(2) + " kB";
+	},
+	
+	removelocalStorage: (i) => {
+		localStorage.removeItem(i);
+		ct.localStorageWindow();
 	},
 	
 	resize: () => {

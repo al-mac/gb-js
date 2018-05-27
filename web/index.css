@@ -13,6 +13,42 @@ html, body {
 	background: #07253D
 }
 
+/* ====WINDOW==== */
+
+#gb-shadow {
+	display:none;
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	z-index:5;
+}
+
+.gb-window {
+	width:80%;
+	height:80%;
+	top:10%;
+	left:calc(50% - 200px);
+	max-width:400px;
+	background:#FFF;
+	border-radius:4px;
+	position:relative;
+	z-index:6;
+	box-shadow: 3px 3px 3px rgba(255, 255, 255, 0.4);
+}
+
+.gb-window-header {
+	height:36px;
+	line-height:36px;
+	margin:4px;
+	border-bottom:1px solid #EEE;
+}
+
+.gb-window-body {
+	width:100%;
+	height:calc(100% - 40px);
+}
+
 /* ====MENU==== */
 #menu {
 	position:absolute;
@@ -167,6 +203,27 @@ html, body {
 	border-radius:2.5em;
 	margin:0 auto;
 	transform:rotate(-20deg);
+}
+
+/*==LOCALSTORAGE TABLE==*/
+#localStorage-table {
+	width:100%;
+	height:calc(100% - 36px);
+	overflow-y:scroll;
+	padding:2px;
+	line-height:2.5em;
+}
+
+table {
+	width:100%;
+	border-collapse:collapse;
+}
+
+table th, table td {
+	border-top:1px solid #DDD;
+	border-bottom:1px solid #DDD;
+	text-align:center;
+	font-size:0.7em;
 }
 
 @media only screen and (min-width: 600px) {

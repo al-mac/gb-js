@@ -8,17 +8,43 @@
 		<link rel="shortcut icon" href="./web/favicon.ico" />
 	</head>
 	<body>
+		<div id="gb-shadow">
+			<div class="gb-window" id="wn-localStorage">
+				<div class="gb-window-header">
+					localStorage Manager
+					<a href="javascript:ct.closeWindow()">[x]</a>
+				</div>
+				<div class="gb-window-body">
+					<div id="localStorage-free">Free Space: 10485760b</div>
+					<div id="localStorage-table">
+						<table id="llt">
+							<thead>
+								<tr>
+									<th>Key</th>
+									<th>Type</th>
+									<th>Size</th>
+									<th>Remove</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div id="menu">
 			<div class="title"><div class="icon"></div></div>
 			<div onclick="ct.openRom()" class="item">Load ROM</div>
 			<div onclick="ct.reset()" class="item">Reset</div>
 			<div onclick="ct.sound()" class="item">Toggle Sound</div>
+			<div onclick="ct.speed()" class="item">Toggle Speed</div>
+			
 			<!--<div class="item">Palette</div>
 			<div class="item">Interface</div>-->
 			<div onclick="ct.save()" class="item">Save State</div>
 			<div onclick="ct.load()" class="item">Load State</div>
-			<!--<div class="item">Local Storage</div>
-			<div class="item">About</div>-->
+			<div onclick="ct.localStorageWindow()" class="item">Local Storage</div>
+			<!--<div class="item">About</div>-->
 			<div onclick="menu.close()" class="item">Close</div>
 		</div>
 		<input style="display:none;" type="file" id="loader" />
