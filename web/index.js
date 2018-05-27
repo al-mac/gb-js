@@ -1,9 +1,15 @@
 var sys = null;
 
 var menu = {
+	desktop: document.body.offsetWidth >= 600,
 	animation: null,
 	element: document.getElementById("menu"),
 	close: function() {
+		if(menu.desktop) {
+			menu.element.style.opacity = "1";
+			menu.element.style.width = "250px";
+			return;
+		};
 		clearInterval(menu.animation);
 		menu.animation = setInterval(function() {
 			var width = menu.element.offsetWidth + 10;
@@ -19,6 +25,7 @@ var menu = {
 			else if(width <= -(left)) {
 				left = -width;
 				menu.element.style.left = left + "px";
+				menu.element.style.opacity = "1";
 				clearInterval(menu.animation);
 			};
 			
@@ -26,6 +33,7 @@ var menu = {
 	},
 	
 	open: function() {
+		if(menu.desktop) return;
 		clearInterval(menu.animation);
 		menu.animation = setInterval(function() {
 			var left = parseInt(menu.element.style.left);

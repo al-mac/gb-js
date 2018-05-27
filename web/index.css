@@ -20,6 +20,7 @@ html, body {
 	height:100%;
 	box-shadow:6px 6px 6px rgba(80,80,80,0.5);
 	z-index:4;
+	opacity:0;
 }
 
 #menu .title {
@@ -37,6 +38,7 @@ html, body {
 }
 
 #menu .item {
+	cursor:pointer;
 	height:8%;
 	border-bottom:1px solid #0B304A;
 	color:#5BB8C1;
@@ -162,4 +164,16 @@ html, body {
 	border-radius:2.5em;
 	margin:0 auto;
 	transform:rotate(-20deg);
+}
+
+@media only screen and (min-width: 600px) {
+    #gb-touch-controls {
+		display:none;
+    }
+	
+	#gb-container { 
+		background:transparent; 
+		border:none;
+	}
+	#display { border:1px solid #000; }
 }
