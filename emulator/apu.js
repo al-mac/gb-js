@@ -83,8 +83,7 @@ var apu = (function(sys) {
 			if(i <= length) {
 				if(c.sweep && i > 0) {
 					if((i % c.sweep.time) === 0) {
-						var freqSweep = calc / 
-							Math.pow(2, c.sweep.shift);
+						var freqSweep = calc / (1 << c.sweep.shift);
 						if(c.sweep.direction)
 							calc += freqSweep;
 						else
