@@ -229,12 +229,16 @@ document.body.onload = function() {
 	ct.resize();
 	menu.close();
 	
+	var c = document.getElementById("display");
+	var ctx = c.getContext("2d");
+	
 	if(!menu.desktop) {
-		var c = document.getElementById("display");
-		var ctx = c.getContext("2d");
 		ctx.font = "8px Monospace, Consolas";
 		ctx.fillText("Touch here to open menu.", 2, 10);
 	};
+	
+	ctx.font = "6px Monospace, Consolas";
+	ctx.fillText("AlMac :: GameBoy (v0.1).", 2, 140);
 	
 	document.onkeydown = function(e) {									// HANDLE KEYS
 		var index = sys.binds.indexOf(e.keyCode);
