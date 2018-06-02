@@ -161,12 +161,16 @@ var ct = {
 		};
 		
 		if(t === 0) {
-			for(var i = 0; i < indexes.length; i++)
+			for(var i = 0; i < indexes.length; i++) {
+				if(indexes[i] === -1) continue;
 				sys.holdButton(indexes[i]);
+			}
 		}
 		else {
-			for(var i = 0; i < indexes.length; i++)
+			for(var i = 0; i < indexes.length; i++) {
+				if(indexes[i] === -1) continue;
 				sys.releaseButton(indexes[i]);
+			}
 		};
 		
 	},
@@ -179,11 +183,13 @@ var ct = {
 		var bx = x - e.offsetLeft;
 		var by = y - e.offsetTop;
 		
-		if(bx < ex * 0.33) ret[0] = 1;
-		else if(bx > ex * 0.66) ret[0] = 0;
-	
-		if(by < ey * 0.33) ret[1] = 2;
-		else if(by > ey * 0.66) ret[1] = 3;
+		if(bx < ex * 0.33) ret[0] = 1;									// LEFT
+		else if(bx > ex * 0.66) ret[0] = 0;								// RIGHT
+		else ret[0] = -1;
+		
+		if(by < ey * 0.33) ret[1] = 2;									// UP
+		else if(by > ey * 0.66) ret[1] = 3;								// DOWN
+		else ret[1] = -1;
 		
 		return ret;
 	},
