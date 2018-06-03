@@ -4,28 +4,41 @@ var menu = {
 	desktop: document.body.offsetWidth >= 600,
 	animation: null,
 	element: document.getElementById("menu"),
-	close: function() {
+	width: 0,
+	translateX: 0,
+	
+	init: function() {
+		menu.width = menu.element.offsetWidth + 10;
+		menu.close(true);
+		menu.element.style.opacity = "1";
+	},
+	
+	close: function(immediate) {
 		if(menu.desktop) {
-			menu.element.style.opacity = "1";
 			menu.element.style.width = "250px";
 			return;
 		};
+		
+		if(immediate) {
+			menu.translateX = -menu.width;
+			menu.element.style.transform = 
+					"translateX("+ menu.translateX + "px)";
+			return;
+		}
+		
 		clearInterval(menu.animation);
 		menu.animation = setInterval(function() {
-			var width = menu.element.offsetWidth + 10;
-			var left = parseInt(menu.element.style.left);
-			if(isNaN(left)) left = 0;
-			
-			if(width > -(left)) {
-				var r = (width + left) * 0.1;
+			if(menu.width > -(menu.translateX)) {
+				var r = (menu.width + menu.translateX) * 0.1;
 				if(r < 1) r = 1;
-				left -= r;
-				menu.element.style.left = left + "px";
+				menu.translateX -= r;
+				menu.element.style.transform = 
+					"translateX("+ menu.translateX + "px)";
 			}
-			else if(width <= -(left)) {
-				left = -width;
-				menu.element.style.left = left + "px";
-				menu.element.style.opacity = "1";
+			else if(menu.width <= -(menu.translateX)) {
+				menu.translateX = -menu.width;
+				menu.element.style.transform = 
+					"translateX(" + menu.translateX + "px)";
 				clearInterval(menu.animation);
 			};
 			
@@ -36,18 +49,17 @@ var menu = {
 		if(menu.desktop) return;
 		clearInterval(menu.animation);
 		menu.animation = setInterval(function() {
-			var left = parseInt(menu.element.style.left);
-			if(isNaN(left)) left = 0;
-			
-			if(left < 0) {
-				var r = -left * 0.1;
+			if(menu.translateX < 0) {
+				var r = -menu.translateX * 0.1;
 				if(r < 1) r = 1;
-				left += r;
-				menu.element.style.left = left + "px";
+				menu.translateX += r;
+				menu.element.style.transform = 
+					"translateX(" + menu.translateX + "px)";
 			}
-			else if(left >= 0) {
-				left = 0;
-				menu.element.style.left = left + "px";
+			else if(menu.translateX >= 0) {
+				menu.translateX = 0;
+				menu.element.style.transform = 
+					"translateX(" + menu.translateX + "px)";
 				clearInterval(menu.animation);
 			};
 		}, 10);
@@ -227,7 +239,7 @@ document.body.onload = function() {
 		document.getElementById("debugWindow")
 	);
 	ct.resize();
-	menu.close();
+	menu.init();
 	
 	var c = document.getElementById("display");
 	var ctx = c.getContext("2d");
