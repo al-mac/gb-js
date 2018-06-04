@@ -250,7 +250,7 @@ document.body.onload = function() {
 	};
 	
 	ctx.font = "6px Monospace, Consolas";
-	ctx.fillText("AlMac :: GameBoy (v0.2).", 2, 140);
+	ctx.fillText("AlMac :: GameBoy (v0.3).", 2, 140);
 	
 	document.onkeydown = function(e) {									// HANDLE KEYS
 		var index = sys.binds.indexOf(e.keyCode);
