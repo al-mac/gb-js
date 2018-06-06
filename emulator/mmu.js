@@ -35,7 +35,7 @@ var mmu = (function(sys) {
 		
 		if(addr < 0x8000) {												// MEMORY BANKING
 			if(addr >= 0x2000 && addr < 0x4000) 
-				cram.changeRomBank(val);
+				cram.changeRomBank(val, addr);
 			else
 				cram.setAddr(addr, val);
 		}

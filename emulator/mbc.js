@@ -20,7 +20,7 @@ var mbc = (function(rom, sys) {
 	};
 	
 	// MBC FUNCTIONS
-	me.changeRomBank = function(bank) {
+	me.changeRomBank = function(bank, addr) {
 		switch(state.type) {
 			case 1:
 				state.rom = bank & 0x1F;
@@ -30,7 +30,10 @@ var mbc = (function(rom, sys) {
 						break;
 				};
 				break;
-			case 2: break; 												// TODO (IMPLEMENT MBC2)
+			case 2: 
+				if(addr & 0x0100)										// WRITTEN ADDRESS AFFECTS MBC2
+					state.rom = bank & 0x0F;
+				break;
 			case 3:
 				state.rom = bank;
 				if(state.rom === 0) state.rom = 1;						// BANK 0 IS UNAVALIABLE IN MBC3
@@ -46,7 +49,8 @@ var mbc = (function(rom, sys) {
 		if(r) {
 			state.rom = (state.rom & 0xE0) | (v & 0x1F);
 			return;
-		}
+		};
+		
 		switch(state.mode) {
 			case 0: state.rom = (state.rom & 0x9F) | (v & 0x60); break;
 			case 1: state.ram = v;
@@ -61,10 +65,22 @@ var mbc = (function(rom, sys) {
 	
 	me.setAddr = function(addr, val) {
 		saveTrigger = false;
-		if(addr < 0x2000)												// ENABLE / DISABLE EXTERNAL RAM
-			state.externalRam = val;
-		else if(addr >= 0x2000 && addr < 0x4000)
-			changeRamBank(val, true);									// CHANGE ROM BANK
+		if(addr < 0x2000) {												// ENABLE / DISABLE EXTERNAL RAM
+			if(state.type === 2) {
+				if(!(addr & 0x0100)) 
+					state.externalRam = val;
+			}
+			else
+				state.externalRam = val;
+		}
+		else if(addr >= 0x2000 && addr < 0x4000) {
+			if(state.type === 2) {
+				if(addr & 0x0100) 
+					changeRamBank(val & 0x0F, true);
+			}
+			else
+				changeRamBank(val, true);								// CHANGE ROM BANK
+		}
 		else if(addr >= 0x4000 && addr < 0x6000)						// CHANGE ROM OR RAM BANK DEPENDING
 			changeRamBank(val, false);									// ON THE CURRENT MODE
 		else if(addr >= 0x6000 && addr < 0x8000) {						// CHANGE MODE
